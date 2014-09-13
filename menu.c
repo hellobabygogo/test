@@ -43,7 +43,7 @@ tDataNode  *FindCmd(tDataNode *head, char *cmd)
     tDataNode *tmp = head;
     while(tmp != NULL)
     {
-        if(!strcmp(tmp->cmd, cmd)) 
+    	if(!strcmp(tmp->cmd, cmd)) 
 	{
             return tmp;
 	}		   
@@ -87,7 +87,7 @@ main()
         }
         printf("%s - %s\n", tmp->cmd, tmp->desc);
         if(tmp->cmd == "help")
-        {
+        { 
             ShowAllCmd(head);
 	}
     }      
