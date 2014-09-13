@@ -44,9 +44,9 @@ tDataNode  *FindCmd(tDataNode *head, char *cmd)
     while(tmp != NULL)
     {
 	    if(!strcmp(tmp->cmd, cmd)) 
-		{
-		    return tmp;
-		}		   
+	    {
+                return tmp;
+	    }		   
 	 	tmp = tmp->next;	   
     }
     return NULL;
@@ -58,10 +58,10 @@ int ShowAllCmd(tDataNode *head)
  	printf("Menu List:\n");
  	while(tmp != NULL)
  	{
-        printf("%s - %s\n", tmp->cmd, tmp->desc);
-        tmp = tmp->next;
-    }
-    return 0;
+            printf("%s - %s\n", tmp->cmd, tmp->desc);
+            tmp = tmp->next;
+        }
+        return 0;
 }
 
 /* menu program */
@@ -89,6 +89,6 @@ main()
         if(tmp->cmd == "help")
         {
 		    ShowAllCmd(head);
-		}
+	}
     }      
 } 
