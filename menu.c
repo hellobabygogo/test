@@ -1,78 +1,94 @@
 
-/******************************************************************************/
-/* Copyright (C) mc2lab.com, SSE@USTC, 2014-2015                              */
-/*                                                                            */
-/* FILE NAME             : menu.c                                             */
-/* PRINCIPAL AUTHOR      : YangXuan                                           */
-/* MODULE NAME           : menu                                               */
-/* SUBSYSTEM NAME        : menu                                               */
-/* LANGUAGE              : C                                                  */
-/* TARGET ENVIROMENT     : ANY                                                */
-/* DATE OF FIRST RELEASE : 2014/09/13                                         */
-/* DESCRIPTION           : This is a menu program                             */
-/******************************************************************************/
+/**************************************************************************************************/
+/* Copyright (C) mc2lab.com, SSE@USTC, 2014-2015                                                  */
+/*                                                                                                */
+/*  FILE NAME             :  menu.c                                                               */
+/*  PRINCIPAL AUTHOR      :  YangXuan                                                             */
+/*  SUBSYSTEM NAME        :  menu                                                                 */
+/*  MODULE NAME           :  menu                                                                 */
+/*  LANGUAGE              :  C                                                                    */
+/*  TARGET ENVIRONMENT    :  ANY                                                                  */
+/*  DATE OF FIRST RELEASE :  2014/09/13                                                           */
+/*  DESCRIPTION           :  This is a menu program                                               */
+/**************************************************************************************************/
 
-
-/*                                                                              
- * Revision log:                                                                
- *                                                                              
- * Created by YangXuan, 2014/09/13                                             
+/*
+ * Revision log:
+ *
+ * Created by YangXuan, 2014/09/13
+ *
  */
-
-
-#nclude<stdio.h>
+ 
+#include<stdio.h>
 #include<stdlib.h>
 
 #define DESC_LEN 1024
-#define CMD_NUM 10
+#define CMD_MAX_LEN 128
 
-typedef struct DataNode
+/* data struct and its operation */
+typedef struct DateNode
 {
-    int       cmd;
-    char      desc[DESC_LEN]; 
-    struct    DataNode *next;
-} tDataNode;
+    char   *cmd;
+    char   *desc;
+    struct DataNode  *next;
+}tDataNode;
+
+
+tDataNode  *FindCmd(tDataNode *head, char *cmd)
+{
+    if(head == NULL || cmd == NULL)
+	{
+	    return NULL;
+	} 
+	tDataNode *tmp = head;
+    while(tmp != NULL)
+    {
+	    if(!strcmp(tmp->cmd, cmd)) 
+		{
+		    return tmp;
+		}		   
+	 	tmp = tmp->next;	   
+    }
+    return NULL;
+}
+
+int ShowAllCmd(tDataNode *head)
+{
+ 	tDataNode *tmp = head;
+ 	printf("Menu List:\n");
+ 	while(tmp != NULL)
+ 	{
+        printf("%s - %s\n", tmp->cmd, tmp->desc);
+        tmp = tmp->next;
+    }
+    return 0;
+}
+
+/* menu program */
+static tDataNode head[] =
+{
+    {"help", "this is help cmd!", &head[1]},
+    {"version", "menu program v1.0", NULL}
+};
 
 main()
-{                                                                                   tDataNode  *head = NULL; 
-    /* Init cmd list */
-    int i;
-    tDataNode  *p = NULL; 
-    for (i = 0; i<CMD_NUM; i++)
-    {
-        p = (tDataNode*)malloc(sizeof(tDataNode));
-        p->cmd = i;
-        snprintf(p->desc, DESC_LEN, "This is %d cmd!", i);
-        p->next = head;
-        head = p;
-    }
-    printf("Menu List:\n");
-    p = head;
-    while(p != NULL) 
-    {
-        printf("%d - %s\n", p->cmd, p->desc);
-        p = p->next;
-    }
+{
     /* cmd line begins */
     while(1)
     {
-        int cmd;
+        char cmd[CMD_MAX_LEN];
         printf("Input a cmd number > ");
-        scanf("%d", &cmd);
-        if(cmd >= CMD_NUM)
+        scanf("%s", cmd);
+        tDataNode *tmp= FindCmd(head, cmd);
+        if(tmp == NULL)
         {
-            printf("This is a wrong cmd number!\n ");
+            printf("This is a wrong cmd!\n ");
             continue;
         }
-        p = head;
-        while(p != NULL) 
+        printf("%s - %s\n", tmp->cmd, tmp->desc);
+        if(tmp->cmd == "help")
         {
-            if(p->cmd == cmd)
-            {
-                printf("%d - %s\n", p->cmd, p->desc);
-                break;
-            }
-            p = p->next;
-        }
-    }
+		    ShowAllCmd(head);
+		}
+    }      
 } 
