@@ -37,17 +37,17 @@ typedef struct DateNode
 tDataNode  *FindCmd(tDataNode *head, char *cmd)
 {
     if(head == NULL || cmd == NULL)
-	{
-	    return NULL;
-	} 
-	tDataNode *tmp = head;
+    {
+        return NULL;
+    } 
+    tDataNode *tmp = head;
     while(tmp != NULL)
     {
-	    if(!strcmp(tmp->cmd, cmd)) 
-	    {
-                return tmp;
-	    }		   
-	 	tmp = tmp->next;	   
+        if(!strcmp(tmp->cmd, cmd)) 
+	{
+            return tmp;
+	}		   
+	tmp = tmp->next;	   
     }
     return NULL;
 }
@@ -88,7 +88,7 @@ main()
         printf("%s - %s\n", tmp->cmd, tmp->desc);
         if(tmp->cmd == "help")
         {
-		    ShowAllCmd(head);
+            ShowAllCmd(head);
 	}
     }      
 } 
