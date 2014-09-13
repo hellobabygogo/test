@@ -54,14 +54,14 @@ tDataNode  *FindCmd(tDataNode *head, char *cmd)
 
 int ShowAllCmd(tDataNode *head)
 {
- 	tDataNode *tmp = head;
- 	printf("Menu List:\n");
- 	while(tmp != NULL)
- 	{
-            printf("%s - %s\n", tmp->cmd, tmp->desc);
-            tmp = tmp->next;
-        }
-        return 0;
+    tDataNode *tmp = head;
+    printf("Menu List:\n");
+    while(tmp != NULL)
+    {
+        printf("%s - %s\n", tmp->cmd, tmp->desc);
+        tmp = tmp->next;
+    }
+    return 0;
 }
 
 /* menu program */
