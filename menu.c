@@ -78,7 +78,7 @@ main()
     while(1)
     { 
         char cmd[CMD_MAX_LEN];
-  	tDataNode  *tmp = NULL; 
+        tDataNode  *tmp = NULL; 
         printf("Input a cmd number > ");
         scanf("%s", cmd);
         tmp = FindCmd(head, cmd);
@@ -91,7 +91,8 @@ main()
         if(tmp->cmd == "help")
         { 
             ShowAllCmd(head);
-	}
+        }
     }
 } 
+
 
