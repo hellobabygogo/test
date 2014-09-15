@@ -18,7 +18,9 @@
  * Created by YangXuan, 2014/09/13
  *
  */
- 
+
+
+
 #include<stdio.h>
 #include<stdlib.h>
 
@@ -26,39 +28,39 @@
 #define CMD_MAX_LEN 128
 
 /* data struct and its operation */
-typedef struct DateNode
+typedef struct DataNode
 {
-    char   *cmd;
-    char   *desc;
-    struct DataNode  *next;
-}tDataNode;
+    char      *cmd;
+    char      *desc; 
+    struct    DataNode *next;
+} tDataNode;
 
 
-tDataNode  *FindCmd(tDataNode *head, char *cmd)
+tDataNode * FindCmd(tDataNode *head, char *cmd)
 {
+    tDataNode *tmp = head;
     if(head == NULL || cmd == NULL)
     {
         return NULL;
-    } 
-    tDataNode *tmp = head;
+    }  
     while(tmp != NULL)
     {
-    	if(!strcmp(tmp->cmd, cmd)) 
-	{
+        if(!strcmp(tmp->cmd, cmd))
+        {
             return tmp;
-	}		   
-	tmp = tmp->next;	   
+        }
+        tmp = tmp->next;
     }
     return NULL;
 }
-
+        
 int ShowAllCmd(tDataNode *head)
 {
     tDataNode *tmp = head;
     printf("Menu List:\n");
     while(tmp != NULL)
     {
-        printf("%s - %s\n", tmp->cmd, tmp->desc);
+        printf("%s - %s\n", tmp->cmd, tmp->desc); 
         tmp = tmp->next;
     }
     return 0;
@@ -69,20 +71,21 @@ static tDataNode head[] =
 {
     {"help", "this is help cmd!", &head[1]},
     {"version", "menu program v1.0", NULL}
-};
+};  
 
 main()
-{
-    /* cmd line begins */
+{                                                                                    
+    /* cmd line begins */ 
     while(1)
-    {
-        char cmd[CMD_MAX_LEN];
+    { 
+  	char cmd[CMD_MAX_LEN];
+  	tDataNode  *tmp = NULL; 
         printf("Input a cmd number > ");
         scanf("%s", cmd);
-        tDataNode *tmp= FindCmd(head, cmd);
+        tmp = FindCmd(head, cmd);
         if(tmp == NULL)
         {
-            printf("This is a wrong cmd!\n ");
+            printf("This is a wrong cmd number!\n");
             continue;
         }
         printf("%s - %s\n", tmp->cmd, tmp->desc);
@@ -90,5 +93,5 @@ main()
         { 
             ShowAllCmd(head);
 	}
-    }      
+    }
 } 
