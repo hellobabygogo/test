@@ -1,4 +1,3 @@
-
 /**************************************************************************************************/
 /* Copyright (C) mc2lab.com, SSE@USTC, 2014-2015                                                  */
 /*                                                                                                */
@@ -78,7 +77,7 @@ main()
     /* cmd line begins */ 
     while(1)
     { 
-  	char cmd[CMD_MAX_LEN];
+        char cmd[CMD_MAX_LEN];
   	tDataNode  *tmp = NULL; 
         printf("Input a cmd number > ");
         scanf("%s", cmd);
@@ -95,3 +94,4 @@ main()
 	}
     }
 } 
+
